@@ -30,6 +30,10 @@ class SignInPage extends Component {
           errors: []
         });
         this.props.history.push("/");
+
+        if (typeof this.props.onSignIn === "function") {
+          this.props.onSignIn();
+        }
       }
     });
   }

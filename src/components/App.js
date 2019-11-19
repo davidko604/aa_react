@@ -4,7 +4,7 @@ import { QuestionIndexPage } from "./QuestionIndexPage";
 import QuestionShowPage from "./QuestionShowPage";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import NavBar from "./NavBar";
-import { Session } from "../requests";
+import { User } from "../requests";
 import SignInPage from "./SignInPage";
 
 // In React application, we create a component that acts
@@ -15,26 +15,34 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentUser: null
+      currentUser: null,
+      loading: true
     };
+
+    // this.getUser = this.getUser.bind(this); //Only need this if getUser is not defined with an Arrow Function
   }
 
-  // componentDidMount() {
-  //   // this gives us a cookie that represents us being logged in
-  //   // Now, when we make POST requests to the server to make a Question,
-  //   // we will be authenticated
-
-  //   // This is a HACKY method until we learn about Authentication in React
-  //   Session.create({
-  //     email: "shaft@hushyomouf.daddy",
-  //     password: "supersecret"
-  //   }).then(user => {
-  //     this.setState({
-  //       currentUser: user
-  //     });
-  //   });
-  // }
+  getUser = () => {
+    User.current()
+      .then(data => {
+        if (typeof data.id !== "number") {
+          this.setState({ loading: false });
+        } else {
+          this.setState({ loading: false, currentUser: data });
+        }
+      })
+      .catch(() => {
+        this.setState({ loading: false });
+      });
+  };
+  componentDidMount() {
+    this.getUser();
+  }
   render() {
+    const { loading, currentUser } = this.state;
+    if (loading) {
+      return <div />;
+    }
     return (
       // We need to wrap all component that are imported from
       // 'react-router-dom' inside of a 'Router' component
@@ -44,7 +52,7 @@ class App extends React.Component {
       // come with 'react-router-dom'
       <BrowserRouter>
         <div className="ui container App">
-          <NavBar />
+          <NavBar currentUser={currentUser} />
           {/* 
             The Route component has many props it uses
             to determine which component to render and when 
@@ -67,7 +75,12 @@ class App extends React.Component {
           <Switch>
             <Route path="/questions" exact component={QuestionIndexPage} />
             <Route path="/questions/:id" component={QuestionShowPage} />
-            <Route path="/sign_in" component={SignInPage} />
+            <Route
+              path="/sign_in"
+              render={routeProps => (
+                <SignInPage {...routeProps} onSignIn={this.getUser} />
+              )}
+            />
           </Switch>
         </div>
       </BrowserRouter>

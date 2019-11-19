@@ -59,4 +59,13 @@ const Session = {
   }
 };
 
-export { Question, Session };
+const User = {
+  current() {
+    return fetch(`${BASE_URL}/users/current`, {
+      method: "GET",
+      credentials: "include"
+    }).then(res => res.json());
+  }
+};
+
+export { Question, Session, User };
