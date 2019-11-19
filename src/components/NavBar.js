@@ -8,6 +8,9 @@ function NavBar(props) {
       <NavLink to="/questions" className="item">
         Questions
       </NavLink>
+      <NavLink to="/sign_in" className="item">
+        Sign In
+      </NavLink>
       <div className="right menu">
         <CurrentDateTime />
       </div>
