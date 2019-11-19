@@ -70,6 +70,7 @@ class QuestionShowPage extends Component {
     if (this.state.isLoading) {
       return <Spinner />;
     }
+    const { answers = [] } = this.state.question;
     return (
       <main>
         <QuestionDetails {...this.state.question} />
@@ -81,7 +82,7 @@ class QuestionShowPage extends Component {
         </button>
         <h2>Answers</h2>
         <AnswerList
-          answers={this.state.question.answers}
+          answers={answers}
           onAnswerDeleteClick={id => this.deleteAnswer(id)}
         />
       </main>

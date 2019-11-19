@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class CurrentDateTime extends Component {
   constructor(props) {
-    console.log("constructor");
+    // console.log("constructor");
     super(props);
     this.state = {
       dateTime: new Date()
@@ -10,7 +10,7 @@ class CurrentDateTime extends Component {
   }
 
   componentDidMount() {
-    console.log("ComponentDidMount");
+    // console.log("ComponentDidMount");
     // This method is called whenever the component is rendered
     // in the dom
     // There many different ways we might want to use this method,
@@ -38,16 +38,16 @@ class CurrentDateTime extends Component {
   }
 
   componentDidUpdate() {
-    console.log("componentDidUpdate");
+    // console.log("componentDidUpdate");
   }
   componentWillUnmount() {
-    console.log("componentWillUnmount");
+    // console.log("componentWillUnmount");
     // This method is called before the component is
     // removed from the DOM
     // Use it to clean up setIntervals, setTimeouts,
     // event listeners, etc
 
-    console.log("this.intervalId: ", this.intervalId);
+    // console.log("this.intervalId: ", this.intervalId);
 
     // 'clearInterval' is a method built in to the browser
     // API that allows to stop the interval with the given

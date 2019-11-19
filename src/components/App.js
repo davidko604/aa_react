@@ -4,8 +4,9 @@ import { QuestionIndexPage } from "./QuestionIndexPage";
 import QuestionShowPage from "./QuestionShowPage";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import NavBar from "./NavBar";
-import { User } from "../requests";
+import { User, Session } from "../requests";
 import SignInPage from "./SignInPage";
+import QuestionNewPage from "./QuestionNewPage";
 
 // In React application, we create a component that acts
 // as the 'root' or the entry point to all of our other
@@ -18,9 +19,13 @@ class App extends React.Component {
       currentUser: null,
       loading: true
     };
-
-    // this.getUser = this.getUser.bind(this); //Only need this if getUser is not defined with an Arrow Function
   }
+
+  signOut = () => {
+    Session.destroy().then(() => {
+      this.setState({ currentUser: null });
+    });
+  };
 
   getUser = () => {
     User.current()
@@ -52,7 +57,7 @@ class App extends React.Component {
       // come with 'react-router-dom'
       <BrowserRouter>
         <div className="ui container App">
-          <NavBar currentUser={currentUser} />
+          <NavBar currentUser={currentUser} onSignOut={this.signOut} />
           {/* 
             The Route component has many props it uses
             to determine which component to render and when 
@@ -74,6 +79,7 @@ class App extends React.Component {
           */}
           <Switch>
             <Route path="/questions" exact component={QuestionIndexPage} />
+            <Route path="/questions/new" component={QuestionNewPage} />
             <Route path="/questions/:id" component={QuestionShowPage} />
             <Route
               path="/sign_in"
