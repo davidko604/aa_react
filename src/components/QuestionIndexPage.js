@@ -60,7 +60,7 @@ export class QuestionIndexPage extends React.Component {
     });
     return (
       <main className="QuestionIndexPage">
-        <QuestionNewPage />
+        {/* <QuestionNewPage /> */}
         <h2>Questions</h2>
         <div
           className="ui list"

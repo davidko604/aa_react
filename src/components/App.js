@@ -7,6 +7,8 @@ import NavBar from "./NavBar";
 import { User, Session } from "../requests";
 import SignInPage from "./SignInPage";
 import QuestionNewPage from "./QuestionNewPage";
+import AuthRoute from "./AuthRoute";
+import { SignUpPage } from "./SignUpPage";
 
 // In React application, we create a component that acts
 // as the 'root' or the entry point to all of our other
@@ -79,7 +81,18 @@ class App extends React.Component {
           */}
           <Switch>
             <Route path="/questions" exact component={QuestionIndexPage} />
-            <Route path="/questions/new" component={QuestionNewPage} />
+            <AuthRoute
+              isAuthenticated={currentUser}
+              path="/questions/new"
+              component={QuestionNewPage}
+            />
+            <Route
+              exact
+              path="/sign_up"
+              render={routeProps => (
+                <SignUpPage {...routeProps} onSignUp={this.getUser} />
+              )}
+            />
             <Route path="/questions/:id" component={QuestionShowPage} />
             <Route
               path="/sign_in"

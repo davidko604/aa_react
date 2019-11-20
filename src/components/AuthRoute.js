@@ -4,7 +4,7 @@ import { Route, Redirect } from "react-router-dom";
 
 const AuthRoute = props => {
   const {
-    isAutheticated = false,
+    isAuthenticated = false,
     component: Component,
     render,
     ...restProps
