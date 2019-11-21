@@ -1,5 +1,7 @@
 import React from "react";
 
+import FormErrors from "./FormErrors/FormErrors";
+
 function NewQuestionForm(props) {
   function handleSubmit(event) {
     event.preventDefault();
@@ -19,10 +21,12 @@ function NewQuestionForm(props) {
       <div className="field">
         <label>Title</label>
         <input type="text" name="title" id="title" />
+        <FormErrors forField="title" errors={props.errors} />
       </div>
       <div className="field">
         <label>Body</label>
         <textarea name="body" rows="2" id="body" />
+        <FormErrors forField="body" errors={props.errors} />
       </div>
       <button className="ui button" type="submit">
         Submit

@@ -4,12 +4,16 @@ import { Question } from "../requests";
 import NewQuestionForm from "./NewQuestionForm";
 
 export default class QuestionNewPage extends Component {
-  constructor(props) {
-    super(props);
-  }
+  state = {
+    errors: []
+  };
   createQuestion = params => {
     Question.create(params).then(question => {
-      this.props.history.push(`/questions/${question.id}`);
+      if (question.errors) {
+        this.setState({ errors: question.errors });
+      } else {
+        this.props.history.push(`/questions/${question.id}`);
+      }
     });
   };
 
@@ -17,7 +21,11 @@ export default class QuestionNewPage extends Component {
     return (
       <main>
         <div className="header">Ask A Question</div>
-        <NewQuestionForm onSubmit={this.createQuestion} />
+        <NewQuestionForm
+          key={this.state.id}
+          onSubmit={this.createQuestion}
+          errors={this.state.errors}
+        />
       </main>
     );
   }
