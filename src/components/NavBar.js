@@ -25,7 +25,9 @@ function NavBar(props) {
           <NavLink to="/questions" onClick={onSignOut} className="item">
             Sign Out
           </NavLink>
-          <span className="item">Logged in as: {currentUser.full_name}</span>
+          <span className="item" style={{ color: "green" }}>
+            Welcome {currentUser.full_name}
+          </span>
         </>
       ) : (
         <React.Fragment>
@@ -38,7 +40,7 @@ function NavBar(props) {
         </React.Fragment>
       )}
       <div className="right menu">
-        <CurrentDateTime />
+        <CurrentDateTime className="item" />
       </div>
     </div>
   );
