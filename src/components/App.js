@@ -100,6 +100,7 @@ class App extends React.Component {
                 <SignInPage {...routeProps} onSignIn={this.getUser} />
               )}
             />
+            <Route component={NotFoundPage} />
           </Switch>
         </div>
       </BrowserRouter>
