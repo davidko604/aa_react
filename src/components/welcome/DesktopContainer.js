@@ -61,7 +61,7 @@ class DesktopContainer extends React.Component {
             pointing={!fixed}
             secondary={!fixed}
             size="large"
-            className="green"
+            className="grey"
           >
             <Container>
               <NavLink to="/">

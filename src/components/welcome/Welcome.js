@@ -15,7 +15,7 @@ import {
   Sidebar,
   Visibility
 } from "semantic-ui-react";
-import ResponsiveContainer from "./ResponsiveContainer";
+// import Banner from "./banner-01.jpg";
 
 const getWidth = () => {
   const isSSR = typeof window === "undefined";
@@ -37,7 +37,13 @@ function Welcome() {
       <Segment
         inverted
         textAlign="center"
-        style={{ minHeight: 205, padding: "2.5em 2.5em" }}
+        style={{
+          minHeight: 300,
+          padding: "2.5em 2.5em",
+          background: `url(
+            "https://444qsz2epfbh277kzua5uipr-wpengine.netdna-ssl.com/wp-content/uploads/2016/10/banner-manufacturing.jpg"
+          )`
+        }}
         vertical
       >
         {returnHeader()}

@@ -7,10 +7,3 @@ body {
 .spinner {
   height: 300px;
 }
-
-.inactive-navlink {
-  color: black;
-}
-.active-navlink {
-  color: red;
-}
