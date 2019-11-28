@@ -9,15 +9,7 @@ export class QuestionIndexPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // Initially the list of the questions is empty until
-      // we fetch them from server
       questions: [],
-      // Initially, before we have fetched the questions
-      // from the server, we will display some loading
-      // indicator to the user.
-      // but, once we have fetched the questions, we will change
-      // the i  sLoading property to 'false'
-      // and display the regular list of questions
       isLoading: true
     };
   }

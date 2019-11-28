@@ -4,7 +4,7 @@ import { NavLink /* Link */ } from "react-router-dom";
 
 const MenuCustomerDropdownItem = () => (
   // <Menu color="green" inverted>
-  <Dropdown text="Customers" className="item">
+  <Dropdown item simple text="Customers" className="item">
     <Dropdown.Menu>
       <Dropdown.Item>
         <NavLink

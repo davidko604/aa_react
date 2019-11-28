@@ -1,5 +1,4 @@
 import React from "react";
-import HomepageHeading from "./HomepageHeading";
 import {
   Button,
   Container,
@@ -32,11 +31,11 @@ function Features() {
                 forms, and slow approvals.
               </p>
               <Header as="h3" style={{ fontSize: "2em" }}>
-                We Make Apples That Can Dance
+                We can give you the world
               </Header>
               <p style={{ fontSize: "1.33em" }}>
-                Yes that's right, you thought it was the stuff of dreams, but
-                even apples can twist and turn to the music.
+                Yes, the world can be in the palm of your hands. If it were hard
+                at all, you wouldn't be our client. Make your dreams come true.
               </p>
             </Grid.Column>
             <Grid.Column floated="right" width={6}>

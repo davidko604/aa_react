@@ -16,6 +16,8 @@ import DesktopContainer from "./welcome/DesktopContainer";
 import MobileContainer from "./welcome/MobileContainer";
 import HomepageHeading from "./welcome/HomepageHeading";
 import ResponsiveContainer from "./welcome/ResponsiveContainer";
+import ResponsiveDashboardContainer from "./dashboard/ResponsiveDashboardContainer";
+import DesktopDashboardContainer from "./welcome/DesktopContainer";
 
 import PropTypes from "prop-types";
 
@@ -34,13 +36,11 @@ MobileContainer.propTypes = {
 ResponsiveContainer.propTypes = {
   children: PropTypes.node
 };
-
-const returnHeader = () => {
-  if (window.innerWidth < 800) {
-    return <HomepageHeading mobile />;
-  } else {
-    return <HomepageHeading />;
-  }
+ResponsiveDashboardContainer.propTypes = {
+  children: PropTypes.node
+};
+DesktopDashboardContainer.propTypes = {
+  children: PropTypes.node
 };
 
 class App extends React.Component {
@@ -82,7 +82,6 @@ class App extends React.Component {
     } else if (currentUser == null) {
       return (
         <BrowserRouter>
-          <div className="ui container App"></div>
           <ResponsiveContainer
             currentUser={currentUser}
             onSignOut={this.onSignOut}
@@ -119,15 +118,15 @@ class App extends React.Component {
     } else {
       return (
         <BrowserRouter>
-          <div className="ui container App">
-            <NavBar currentUser={currentUser} onSignOut={this.onSignOut} />
+          <ResponsiveDashboardContainer
+            currentUser={currentUser}
+            onSignOut={this.onSignOut}
+          >
             <Switch>
+              <Route path="/" exact component={Welcome} />
               <Route path="/questions" exact component={QuestionIndexPage} />
-              <AuthRoute
-                isAuthenticated={currentUser}
-                path="/questions/new"
-                component={QuestionNewPage}
-              />
+
+              <Route path="/questions/:id" component={QuestionShowPage} />
               <Route
                 exact
                 path="/sign_up"
@@ -135,29 +134,20 @@ class App extends React.Component {
                   <SignUpPage {...routeProps} onSignUp={this.getUser} />
                 )}
               />
-              <Route path="/questions/:id" component={QuestionShowPage} />
+
               <Route
                 path="/sign_in"
                 render={routeProps => (
                   <SignInPage {...routeProps} onSignIn={this.getUser} />
                 )}
               />
-              <Welcome />
             </Switch>
             Logged in
-          </div>
+          </ResponsiveDashboardContainer>
         </BrowserRouter>
       );
     }
   }
-
-  // render() {
-  //   return (
-  //     <ResponsiveContainer>
-  //       <Welcome />
-  //     </ResponsiveContainer>
-  //   );
-  // }
 }
 
 export default App;

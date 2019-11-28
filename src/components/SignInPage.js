@@ -1,5 +1,16 @@
 import React, { Component } from "react";
 import { Session } from "../requests";
+import Logo from "./welcome/logo.png";
+import {
+  Button,
+  Form,
+  Grid,
+  Header,
+  Image,
+  Message,
+  Segment
+} from "semantic-ui-react";
+import { Link } from "react-router-dom";
 
 class SignInPage extends Component {
   constructor(props) {
@@ -40,38 +51,58 @@ class SignInPage extends Component {
   render() {
     const { errors } = this.state;
     return (
-      <main>
-        <div className="ui header">Sign In</div>
-        <form className="ui form" onSubmit={this.createSession}>
-          {errors.length > 0 ? (
-            <div className="ui negative message FormErrors">
-              <div className="header">Error Signing in...</div>
-              <p>{errors.map(err => err.message).join(",")}</p>
-            </div>
-          ) : null}
-          <div className="field">
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              placeholder="email@domain.ext"
-            />
-          </div>
-          <div className="field">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="enter your password"
-            />
-          </div>
-          <button className="ui blue button" type="submit">
-            Sign In
-          </button>
-        </form>
-      </main>
+      <Grid
+        textAlign="center"
+        style={{ height: "100vh" }}
+        verticalAlign="middle"
+      >
+        <Grid.Column style={{ maxWidth: 450 }}>
+          <Header as="h2" color="teal" textAlign="center">
+            <Image src={Logo} /> Sign in to your account
+          </Header>
+          <Form size="large" className="ui form" onSubmit={this.createSession}>
+            {errors.length > 0 ? (
+              <div className="ui negative message FormErrors">
+                <div className="header">Error Signing in...</div>
+                <p>{errors.map(err => err.message).join(",")}</p>
+              </div>
+            ) : null}
+
+            <Segment stacked>
+              <Form.Input
+                name="email"
+                id="email"
+                fluid
+                icon="user"
+                iconPosition="left"
+                placeholder="email@email.com"
+              />
+              <Form.Input
+                fluid
+                name="password"
+                id="password"
+                icon="lock"
+                iconPosition="left"
+                placeholder="Password"
+                type="password"
+              />
+
+              <Button
+                color="teal"
+                fluid
+                size="large"
+                className="ui blue button"
+                type="submit"
+              >
+                Login
+              </Button>
+            </Segment>
+          </Form>
+          <Message>
+            New to us? <Link to="/sign_up">Sign Up</Link>
+          </Message>
+        </Grid.Column>
+      </Grid>
     );
   }
 }

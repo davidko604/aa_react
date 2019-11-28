@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink /* Link */ } from "react-router-dom";
-import Logo from "./logo.png";
+import LogoWhite from "../logo-white.png";
 import MenuProductDropdownItem from "./MenuProductDropdownItem";
 import MenuCustomerDropdownItem from "./MenuCustomerDropdownItem";
 import MenuCompanyDropdownItem from "./MenuCompanyDropdownItem";
@@ -39,9 +39,6 @@ const getWidth = () => {
 class DesktopContainer extends React.Component {
   state = {};
 
-  hideFixedMenu = () => this.setState({ fixed: false });
-  showFixedMenu = () => this.setState({ fixed: true });
-
   render() {
     const { children } = this.props;
     const { fixed } = this.state;
@@ -61,11 +58,11 @@ class DesktopContainer extends React.Component {
             pointing={!fixed}
             secondary={!fixed}
             size="large"
-            className="grey"
+            className="black"
           >
             <Container>
               <NavLink to="/">
-                <img src={Logo} height="70px"></img>
+                <img src={LogoWhite} height="70px"></img>
               </NavLink>
               <Menu.Item as="a">
                 <MenuProductDropdownItem />

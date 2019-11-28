@@ -2,7 +2,6 @@ import React from "react";
 import { NavLink /* Link */ } from "react-router-dom";
 import Logo from "../logo.png";
 import HomepageHeading from "./HomepageHeading";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import {

@@ -8,13 +8,13 @@ import { Menu, Dropdown } from "react-bootstrap";
 function NavBar(props) {
   const { currentUser, onSignOut } = props;
 
-  const handleSignOutClick = event => {
-    event.preventDefault();
+  // const handleSignOutClick = event => {
+  //   event.preventDefault();
 
-    if (typeof onSignOut === "function") {
-      onSignOut();
-    }
-  };
+  //   if (typeof onSignOut === "function") {
+  //     onSignOut();
+  //   }
+  // };
   return (
     <div className="ui menu">
       <NavLink to="/" className="item">
