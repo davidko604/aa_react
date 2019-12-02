@@ -17,7 +17,11 @@ import MobileContainer from "./welcome/MobileContainer";
 import HomepageHeading from "./welcome/HomepageHeading";
 import ResponsiveContainer from "./welcome/ResponsiveContainer";
 import ResponsiveDashboardContainer from "./dashboard/ResponsiveDashboardContainer";
-import DesktopDashboardContainer from "./welcome/DesktopContainer";
+import DesktopDashboardContainer from "./dashboard/DesktopDashboardContainer";
+import HomeDashboard from "./dashboard/HomeDashboard";
+import Parts from "./dashboard/Parts";
+import PartsInactive from "./dashboard/PartsInactive";
+import PartsNew from "./dashboard/PartsNew";
 
 import PropTypes from "prop-types";
 
@@ -111,7 +115,6 @@ class App extends React.Component {
                 )}
               />
             </Switch>
-            Not Logged in
           </ResponsiveContainer>
         </BrowserRouter>
       );
@@ -124,6 +127,13 @@ class App extends React.Component {
           >
             <Switch>
               <Route path="/" exact component={Welcome} />
+              <Route path="/home" exact component={HomeDashboard} />
+              <Route path="/parts" exact component={Parts} />
+              <Route path="/parts_inactive" exact component={PartsInactive} />
+              <Route path="/parts/new" exact component={PartsNew} />
+
+              <Route path="/features" exact component={Features} />
+
               <Route path="/questions" exact component={QuestionIndexPage} />
 
               <Route path="/questions/:id" component={QuestionShowPage} />
@@ -142,7 +152,6 @@ class App extends React.Component {
                 )}
               />
             </Switch>
-            Logged in
           </ResponsiveDashboardContainer>
         </BrowserRouter>
       );

@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink /* Link */ } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import Logo from "../logo.png";
 import LogoWhite from "../logo-white.png";
 
@@ -8,7 +8,6 @@ import {
   Container,
   Divider,
   Grid,
-  Header,
   Icon,
   Image,
   List,
@@ -16,7 +15,8 @@ import {
   Responsive,
   Segment,
   Sidebar,
-  Visibility
+  Visibility,
+  Component
 } from "semantic-ui-react";
 
 const getWidth = () => {
@@ -39,7 +39,8 @@ class DesktopDashboardContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      sidebarOpened: true
+      sidebarOpened: true,
+      activeMenu: "dashboard"
     };
   }
 
@@ -51,6 +52,11 @@ class DesktopDashboardContainer extends React.Component {
     const { fixed } = this.state;
     const { currentUser, onSignOut } = this.props;
     const { sidebarOpened } = this.state;
+    const menus = {
+      name: "form",
+      icon: "checkmark box",
+      submenus: [{ name: "input" }, { name: "range-picker" }]
+    };
 
     return (
       <Responsive
@@ -65,58 +71,102 @@ class DesktopDashboardContainer extends React.Component {
           onHide={this.handleSidebarHide}
           vertical
           visible={sidebarOpened}
-          className="green"
+          className="blue"
           width="thin"
         >
           <Menu.Item as="a">
-            <NavLink to="/">
-              <img src={Logo} height="70px"></img>
+            <NavLink to="/home">
+              <img src={Logo} height="50px"></img>
             </NavLink>
           </Menu.Item>
 
           <Menu.Item
             as="a"
-            style={{ color: "black", fontWeight: "bold", fontSize: "1.2em" }}
+            style={{ color: "black", fontWeight: "bold", fontSize: "1.0em" }}
             className="item"
           >
-            Product
+            Production Management
           </Menu.Item>
-          <Menu.Item as="a" style={{ marginLeft: "0.5em" }}>
-            <NavLink to="/">Overview</NavLink>
-          </Menu.Item>
-          <Menu.Item as="a" style={{ marginLeft: "0.5em" }}>
-            <NavLink to="/questions">Features</NavLink>
-          </Menu.Item>
-          <Menu.Item as="a" style={{ marginLeft: "0.5em" }}>
-            <NavLink to="/questions/new">Pricing</NavLink>
-          </Menu.Item>
+          <NavLink to="/parts">
+            <Menu.Item
+              as="a"
+              style={{ marginLeft: "0.4em", fontSize: "0.8em" }}
+            >
+              Parts & Configurations
+            </Menu.Item>
+          </NavLink>
+          <NavLink to="/features">
+            <Menu.Item
+              as="a"
+              style={{ marginLeft: "0.4em", fontSize: "0.8em" }}
+            >
+              Manufacturing Orders
+            </Menu.Item>
+          </NavLink>
+          <NavLink to="/">
+            <Menu.Item
+              as="a"
+              style={{ marginLeft: "0.4em", fontSize: "0.8em" }}
+            >
+              Subcontractor Orders
+            </Menu.Item>
+          </NavLink>
+          <NavLink to="/questions">
+            <Menu.Item
+              as="a"
+              style={{ marginLeft: "0.4em", fontSize: "0.8em" }}
+            >
+              Quality Control
+            </Menu.Item>
+          </NavLink>
+          <NavLink to="/questions">
+            <Menu.Item
+              as="a"
+              style={{ marginLeft: "0.4em", fontSize: "0.8em" }}
+            >
+              Material Requirements Planning
+            </Menu.Item>
+          </NavLink>
+
           <Menu.Item
             as="a"
-            style={{ color: "black", fontWeight: "bold", fontSize: "1.2em" }}
+            style={{ color: "black", fontWeight: "bold", fontSize: "1.0em" }}
             className="item"
           >
-            Customers
+            Sales Management
           </Menu.Item>
-          <Menu.Item as="a" style={{ marginLeft: "0.5em" }}>
-            <NavLink to="/">Industries</NavLink>
-          </Menu.Item>
-          <Menu.Item as="a" style={{ marginLeft: "0.5em" }}>
-            <NavLink to="/questions">Testimonials</NavLink>
-          </Menu.Item>
-          <Menu.Item as="a" style={{ marginLeft: "0.5em" }}>
-            <NavLink to="/questions/new">Customer Success</NavLink>
-          </Menu.Item>
+          <NavLink to="/">
+            <Menu.Item
+              as="a"
+              style={{ marginLeft: "0.4em", fontSize: "0.8em" }}
+            >
+              Sales Orders
+            </Menu.Item>
+          </NavLink>
 
-          {currentUser ? (
-            <>
-              <NavLink to="/" onClick={onSignOut} className="ui item">
-                Sign Out
-              </NavLink>
-              <span className="ui item" style={{ color: "Black" }}></span>
-            </>
-          ) : (
-            <React.Fragment></React.Fragment>
-          )}
+          <Menu.Item
+            as="a"
+            style={{ color: "black", fontWeight: "bold", fontSize: "1.0em" }}
+            className="item"
+          >
+            Materials Management
+          </Menu.Item>
+          <NavLink to="/">
+            <Menu.Item
+              as="a"
+              style={{ marginLeft: "0.4em", fontSize: "0.8em" }}
+            >
+              Inventory
+            </Menu.Item>
+          </NavLink>
+          <NavLink to="/features">
+            <Menu.Item
+              as="a"
+              style={{ marginLeft: "0.4em", fontSize: "0.8em" }}
+            >
+              Purchase Orders
+            </Menu.Item>
+          </NavLink>
         </Sidebar>
 
         <Sidebar.Pusher>
@@ -125,9 +175,9 @@ class DesktopDashboardContainer extends React.Component {
               <Menu.Item onClick={this.handleToggle}>
                 <Icon name="sidebar" />
               </Menu.Item>
-
-              <Menu.Item as="a">Home</Menu.Item>
-
+              <NavLink to="/home" style={{ textDecoration: "none" }}>
+                <Menu.Item as="a">Home</Menu.Item>
+              </NavLink>
               {currentUser ? (
                 <>
                   <Menu.Item position="right">
@@ -140,14 +190,37 @@ class DesktopDashboardContainer extends React.Component {
                     >
                       Welcome {currentUser.full_name}
                     </span>
-                    <NavLink
-                      to="/"
-                      onClick={onSignOut}
-                      style={{ color: "green" }}
+                  </Menu.Item>
+                  <NavLink to="/">
+                    <Menu.Item as="a">Profile</Menu.Item>
+                  </NavLink>
+                  <NavLink to="/">
+                    <Menu.Item as="a">Settings</Menu.Item>
+                  </NavLink>
+                  <NavLink to="/">
+                    <Button
+                      as="a"
+                      color="yellow"
+                      className="button"
+                      style={{
+                        marginLeft: "0.4em",
+                        marginRigh: "0.4em",
+                        marginTop: "0.5em"
+                      }}
+                      size="tiny"
+                    >
+                      Upgrade
+                    </Button>
+                  </NavLink>
+
+                  <NavLink to="/" onClick={onSignOut}>
+                    <Menu.Item
+                      as="a"
+                      style={{ color: "green", marginRight: "1em" }}
                     >
                       Sign Out
-                    </NavLink>
-                  </Menu.Item>
+                    </Menu.Item>
+                  </NavLink>
                 </>
               ) : (
                 <React.Fragment></React.Fragment>

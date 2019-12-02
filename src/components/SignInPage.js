@@ -40,7 +40,7 @@ class SignInPage extends Component {
         this.setState({
           errors: []
         });
-        this.props.history.push("/");
+        this.props.history.push("/home");
 
         if (typeof this.props.onSignIn === "function") {
           this.props.onSignIn();
